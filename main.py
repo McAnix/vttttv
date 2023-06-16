@@ -19,8 +19,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 initial_text = "Hello! How are you?"
 
 pygame.init()
-pygame.mixer.pre_init(frequency=110250)
-pygame.mixer.init(frequency=110250)
+pygame.mixer.init()
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(message)s')
 
@@ -41,6 +40,7 @@ def speak(input_text: str, language = "en", tld="us"):
 speak(initial_text)
 
 r = sr.Recognizer()
+r.pause_threshold = 2
 
 messages = [{"role": "assistant", "content": initial_text}]
 
@@ -53,8 +53,9 @@ while True:
             # wait for a second to let the recognizer
             # adjust the energy threshold based on
             # the surrounding noise level
-            r.adjust_for_ambient_noise(source2, duration=0.2)
+            r.adjust_for_ambient_noise(source2, duration=0.5)
             #listens for the user's input
+            logging.debug("Listening...")
             audio2 = r.listen(source2)
             logging.debug("Received audio from user, processing")
             # Using google to recognize audio
