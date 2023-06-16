@@ -1,0 +1,6 @@
+openai
+gtts
+pygame
+SpeechRecognition
+pyaudio==0.2.12
+python-dotenv
