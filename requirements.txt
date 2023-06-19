@@ -4,3 +4,8 @@ pygame
 SpeechRecognition
 pyaudio==0.2.12
 python-dotenv
+numpy
+soundfile
+torch
+tqdm
+whisper-openai
